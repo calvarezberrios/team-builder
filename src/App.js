@@ -56,8 +56,8 @@ function App() {
       setMembers(newMemberList);
       setMemberToDelete(null);
     }
-
-  }, [memberToDelete]);
+    
+  }, [memberToDelete, members]);
 
 
   return (
