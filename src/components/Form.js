@@ -20,13 +20,14 @@ const Form = ({ members, setMembers, memberToEdit, setMemberToEdit, editMember }
     const [member, setMember] = useState({
         name: "",
         email: "",
-        role: ""
+        role: "",
+        department: ""
     });
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
         if(memberToEdit){
-            setMember({id: memberToEdit.id, name: memberToEdit.name, email: memberToEdit.email, role: memberToEdit.role});
+            setMember({id: memberToEdit.id, name: memberToEdit.name, email: memberToEdit.email, role: memberToEdit.role, department: memberToEdit.department});
             setIsEditing(true);
         } else {
             setIsEditing(false);
@@ -47,7 +48,7 @@ const Form = ({ members, setMembers, memberToEdit, setMemberToEdit, editMember }
 
         if(members.find(person => person.email === member.email) === undefined) {
             setMembers([...members, member]);
-            setMember({name: "", email: "", role: ""});
+            setMember({name: "", email: "", role: "", department: ""});
         } else {
         customAlert(`There is already a team member with the same email: ${member.email}. Please check the email and try again.`);
         }
@@ -56,9 +57,12 @@ const Form = ({ members, setMembers, memberToEdit, setMemberToEdit, editMember }
 
     const clearForm = (e) => {
         e.preventDefault();
-        setMember({name: "", email: "", role: ""});
+        setMember({name: "", email: "", role: "", department: ""});
         setMemberToEdit(null);
     }
+
+
+
     
     return (
         <FormContainer onSubmit = {isEditing ? editMember : addMember} onReset = {clearForm}>
@@ -77,10 +81,20 @@ const Form = ({ members, setMembers, memberToEdit, setMemberToEdit, editMember }
             </FormGroup>
 
             <FormGroup row>
-                <Label for="exampleCustomSelect" sm = {2}>Role:</Label>
+                <Label for="role" sm = {2}>Role:</Label>
                 <Col sm = {10}>
-                    <CustomInput type="select" id="exampleCustomSelect" name="role" onChange = {handleChanges} value = {member.role} >
+                    <CustomInput type="select" id="role" name="role" onChange = {handleChanges} value = {member.role} >
                         <option value="">Select a Role</option>
+                        <option>CEO</option>
+                        <option>CTO</option>
+                        <option>COO</option>
+                        <option>CFO</option>
+                        <option>Sales Rep</option>
+                        <option>Customer Service Rep</option>
+                        <option>Marketer</option>
+                        <option>Manager</option>
+                        <option>Payroll</option>
+                        <option>Scheduling</option>
                         <option>Frontend Engineer</option>
                         <option>Backend Engineer</option>
                         <option>UX/UI Designer</option>
@@ -90,6 +104,24 @@ const Form = ({ members, setMembers, memberToEdit, setMemberToEdit, editMember }
                     </CustomInput>
                 </Col>
             </FormGroup>
+
+            <FormGroup row>
+                <Label for="department" sm = {4}>Department:</Label>
+                <Col sm = {8}>
+                    <CustomInput type="select" id="department" name="department" onChange = {handleChanges} value = {member.department} >
+                        <option value="">Select a Department</option>
+                        <option>Operations</option>
+                        <option>Human Resources</option>
+                        <option>Customer Service</option>
+                        <option>Marketing</option>
+                        <option>Sales</option>
+                        <option>Web Development</option>
+                        <option>Mobile Development</option>
+                    </CustomInput>
+                </Col>
+            </FormGroup>
+
+            
 
             <Button type = "submit">{isEditing ? "Edit" : "Add"} Team Member</Button>{" "}
             <Button type = "reset">Reset</Button>

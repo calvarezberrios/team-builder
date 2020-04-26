@@ -1,33 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavbarText
-} from 'reactstrap';
-import { Link } from "react-router-dom";
-import Form from "./components/Form";
+import { Route } from "react-router-dom";
+import { teamMembers } from "./dummy-data";
+import NavBar from "./components/NavBar";
 import TeamMembers from "./components/TeamMembers";
+import Home from "./components/Home";
 
 function App() {
-  // Reactstrap Navbar state and toggle function
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-
   // Team Member List state
-  const [members, setMembers] = useState([
-    {
-      id: 1,      
-      name: "John Smith",
-      email: "jsmith@abcinc.com",
-      role: "CTO"
-    }
-  ]);
-
+  const [members, setMembers] = useState(teamMembers);
   const [memberToEdit, setMemberToEdit] = useState();
   const [memberToDelete, setMemberToDelete] = useState();
 
@@ -38,6 +19,7 @@ function App() {
         member.name = memberToEdit.name;
         member.email = memberToEdit.email;
         member.role = memberToEdit.role;
+        member.department = memberToEdit.department;
       }
     });
     setMemberToEdit(null);
@@ -49,7 +31,7 @@ function App() {
     if(memberToDelete){
       const newMemberList = members;
 
-      const memberIndex = newMemberList.findIndex(member => member.id === memberToDelete.id);
+      const memberIndex = newMemberList.findIndex(member => member.id === memberToDelete);
 
       newMemberList.splice(memberIndex, 1);
 
@@ -62,26 +44,20 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Emani Computers</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <Link className = "nav-link" to="/">Something</Link>
-            </NavItem>
-          </Nav>
-          <NavbarText>Team Members</NavbarText>
-        </Collapse>
-      </Navbar>
-
-
-
-      <Form members = {members} setMembers = {setMembers} memberToEdit = {memberToEdit} setMemberToEdit = {setMemberToEdit} editMember = {editMember} />
-
-      <TeamMembers members = {members} setMemberToEdit = {setMemberToEdit} setMemberToDelete = {setMemberToDelete} />
       
+      <NavBar />
 
+      <Route exact path = "/" component = {Home} />
+      
+      <Route path ="/employees"> 
+        <TeamMembers 
+          members = {members} 
+          setMembers = {setMembers} 
+          memberToEdit = {memberToEdit}
+          setMemberToEdit = {setMemberToEdit} 
+          setMemberToDelete = {setMemberToDelete} 
+          editMember = {editMember} />
+      </Route>
       
     </div>
   );
