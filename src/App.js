@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import {
   Collapse,
@@ -29,6 +29,7 @@ function App() {
   ]);
 
   const [memberToEdit, setMemberToEdit] = useState();
+  const [memberToDelete, setMemberToDelete] = useState();
 
   const editMember = (e) => {
     e.preventDefault();
@@ -42,6 +43,21 @@ function App() {
     setMemberToEdit(null);
     e.target.reset();
   }
+
+  useEffect(() => {
+
+    if(memberToDelete){
+      const newMemberList = members;
+
+      const memberIndex = newMemberList.findIndex(member => member.id === memberToDelete.id);
+
+      newMemberList.splice(memberIndex, 1);
+
+      setMembers(newMemberList);
+      setMemberToDelete(null);
+    }
+
+  }, [memberToDelete]);
 
 
   return (
@@ -62,7 +78,8 @@ function App() {
 
 
       <Form members = {members} setMembers = {setMembers} memberToEdit = {memberToEdit} setMemberToEdit = {setMemberToEdit} editMember = {editMember} />
-      <TeamMembers members = {members} setMembers = {setMembers} setMemberToEdit = {setMemberToEdit}/>
+
+      <TeamMembers members = {members} setMemberToEdit = {setMemberToEdit} setMemberToDelete = {setMemberToDelete} />
       
 
       

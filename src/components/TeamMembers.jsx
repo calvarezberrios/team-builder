@@ -1,7 +1,9 @@
 import React from 'react';
 import { Table, Button } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const TeamMembers = ({ members, setMemberToEdit }) => {
+const TeamMembers = ({ members, setMemberToEdit, setMemberToDelete }) => {
+    
     return (
 
         <Table striped>
@@ -23,7 +25,25 @@ const TeamMembers = ({ members, setMemberToEdit }) => {
                             <td>{member.name}</td>
                             <td>{member.email}</td>
                             <td>{member.role}</td>
-                            <td><Button onClick = {() => setMemberToEdit({id: member.id, name: member.name, email: member.email, role: member.role})}>Edit</Button></td>
+                            <td>
+                                <Button  onClick = {() => setMemberToEdit({
+                                        id: member.id, 
+                                        name: member.name, 
+                                        email: member.email, 
+                                        role: member.role
+                                })}>
+                                    <FontAwesomeIcon icon = "edit" />
+                                </Button>{" "}
+
+                                <Button onClick = {() => setMemberToDelete({
+                                        id: member.id, 
+                                        name: member.name, 
+                                        email: member.email, 
+                                        role: member.role
+                                })}>
+                                    <FontAwesomeIcon icon = "trash" />
+                                </Button>
+                            </td>
                         </tr>);
                 })}
 
