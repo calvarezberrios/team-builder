@@ -7,7 +7,8 @@ import {
     NavItem,
     NavbarText
 } from 'reactstrap';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Route, Link } from "react-router-dom";
+import SubNav from "./SubNav";
 
 
 export default function NavBar() {
@@ -35,19 +36,23 @@ export default function NavBar() {
 
 
     return (
-        <Navbar color="light" light expand="md">
-            <Link className="navbar-brand" to="/" onClick={closeNav}>Emani Computers</Link>
-            <NavbarToggler onClick={toggle} />
-            <NavbarText>{curPage}</NavbarText>
-            <Collapse isOpen={isOpen} navbar>
-                <Nav className="mr-auto" navbar>
-                    <NavItem>
-                        <Link className="nav-link" to="/employees" onClick={closeNav}>Employees</Link>
-                    </NavItem>
-                </Nav>
+        <header>
+            <Navbar color="light" light expand="md">
+                <Link className="navbar-brand" to="/" onClick={closeNav}>Emani Computers</Link>
+                <NavbarToggler onClick={toggle} />
+                <NavbarText>{curPage}</NavbarText>
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="mr-auto" navbar>
+                        <NavItem>
+                            <Link className="nav-link" to="/employees" onClick={closeNav}>Employees</Link>
+                        </NavItem>
+                    </Nav>
 
-            </Collapse>
+                </Collapse>
 
-        </Navbar>
+            </Navbar>
+
+            <Route path = "/employees" component = {SubNav} />
+        </header>
     );
 }

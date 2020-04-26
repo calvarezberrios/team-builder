@@ -72,3 +72,55 @@
   max-width: 1000px;
   margin: 0 auto;
 }
+
+.subNav {
+  
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.subNav .linksContainer {
+  width: 100%;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+}
+
+.subNav .btn {
+  display: none;
+}
+
+.subNav .linksContainer .links {
+  min-width: 900px;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 70px;
+}
+
+.subNav .linksContainer .links a {
+  padding: 10px 0;
+  margin: 0 5px;
+  display: inline-block;
+  width: 100px;
+  height: 70px;
+  vertical-align: middle;
+  text-align: center;
+  color: black;
+}
+
+.subNav .linksContainer .links a.active {
+  text-decoration: underline;
+  color: cornflowerblue;
+}
+
+
+.subNav .linksContainer .links a:first-child {
+  margin-left: 0;
+}
+.subNav .linksContainer .links a:last-child {
+  margin-right: 0;
+}
