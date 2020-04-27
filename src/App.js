@@ -29,14 +29,23 @@ function App() {
   useEffect(() => {
 
     if(memberToDelete){
+
+      
       const newMemberList = members;
 
       const memberIndex = newMemberList.findIndex(member => member.id === memberToDelete);
 
-      newMemberList.splice(memberIndex, 1);
+      const confirmed = window.confirm(`Are you sure you want to delete ${members[memberIndex].name}?`);
 
-      setMembers(newMemberList);
-      setMemberToDelete(null);
+      if(confirmed) {
+        newMemberList.splice(memberIndex, 1);
+
+        setMembers(newMemberList);
+        setMemberToDelete(null);
+      } else {
+        setMemberToDelete(null);
+      }
+      
     }
     
   }, [memberToDelete, members]);
