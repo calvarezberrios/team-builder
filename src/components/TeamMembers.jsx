@@ -6,8 +6,7 @@ import Form from "./Form";
 const TeamMembers = ({ members, setMembers, memberToEdit, setMemberToEdit, setMemberToDelete, editMember }) => {
     //Modal Reacstrap state and function
     const [modalForm, setModalForm] = useState(false);
-    const toggleForm = () => setModalForm(!modalForm);
-    
+    const toggleForm = () => setModalForm(!modalForm);    
     
     return (
         <div>

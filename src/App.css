@@ -86,7 +86,7 @@
 
 .subNav .linksContainer {
   width: 100%;
-  overflow-y: hidden;
+  overflow: hidden;
   scroll-behavior: smooth;
 }
 

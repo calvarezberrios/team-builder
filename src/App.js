@@ -50,11 +50,20 @@ function App() {
     
   }, [memberToDelete, members]);
 
+  const [curList, setCurList] = useState("");
+
+  useEffect(() => {
+      const filtered = teamMembers.filter(member => member.department.includes(curList));
+      setMembers(filtered);
+  }, [curList]);
+
+  
+
 
   return (
     <div className="App">
       
-      <NavBar />
+      <NavBar setCurList = {setCurList} />
 
       <Route exact path = "/" component = {Home} />
       
