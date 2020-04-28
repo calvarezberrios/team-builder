@@ -1,8 +1,44 @@
 import React, { useEffect } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
 
-const SubNav = () => {
+const SubNav = ({ setCurPage }) => {
+
+    const { location } = useHistory();
+    
+
+
+    useEffect(() => {
+        switch (location.pathname) {
+            case "/employees":
+                setCurPage("Employee List");
+                break;
+                case "/employees/ops":
+                    setCurPage("Operations Team");
+                    break;
+                case "/employees/hr":
+                    setCurPage("Human Resources Team");
+                    break;
+                case "/employees/cust-svc":
+                        setCurPage("Customer Service Team");
+                        break;
+                case "/employees/sales":
+                    setCurPage("Sales Team");
+                    break;
+                case "/employees/marketing":
+                    setCurPage("Marketing Team");
+                    break;
+                case "/employees/mobile-dev":
+                    setCurPage("Mobile Development Team");
+                    break;
+                case "/employees/web-dev":
+                    setCurPage("Web Development Team");
+                    break;
+            default:
+                setCurPage("");
+        }
+
+    }, [location.pathname, setCurPage]);
 
 
     const toggleButtons = () => {

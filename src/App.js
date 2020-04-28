@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Route } from "react-router-dom";
 import { teamMembers } from "./dummy-data";
@@ -9,61 +9,14 @@ import Home from "./components/Home";
 function App() {
   // Team Member List state
   const [members, setMembers] = useState(teamMembers);
-  const [memberToEdit, setMemberToEdit] = useState();
-  const [memberToDelete, setMemberToDelete] = useState();
-
-  const editMember = (e) => {
-    e.preventDefault();
-    members.forEach(member => {
-      if(member.id === memberToEdit.id) {
-        member.name = memberToEdit.name;
-        member.email = memberToEdit.email;
-        member.role = memberToEdit.role;
-        member.department = memberToEdit.department;
-      }
-    });
-    setMemberToEdit(null);
-    e.target.reset();
-  }
-
-  useEffect(() => {
-
-    if(memberToDelete){
-
-      
-      const newMemberList = members;
-
-      const memberIndex = newMemberList.findIndex(member => member.id === memberToDelete);
-
-      const confirmed = window.confirm(`Are you sure you want to delete ${members[memberIndex].name}?`);
-
-      if(confirmed) {
-        newMemberList.splice(memberIndex, 1);
-
-        setMembers(newMemberList);
-        setMemberToDelete(null);
-      } else {
-        setMemberToDelete(null);
-      }
-      
-    }
-    
-  }, [memberToDelete, members]);
-
-  const [curList, setCurList] = useState("");
-
-  useEffect(() => {
-      const filtered = teamMembers.filter(member => member.department.includes(curList));
-      setMembers(filtered);
-  }, [curList]);
-
-  
+  const [curPage, setCurPage] = useState("");
 
 
   return (
     <div className="App">
       
-      <NavBar setCurList = {setCurList} />
+      <NavBar curPage = {curPage} />
+      
 
       <Route exact path = "/" component = {Home} />
       
@@ -71,10 +24,9 @@ function App() {
         <TeamMembers 
           members = {members} 
           setMembers = {setMembers} 
-          memberToEdit = {memberToEdit}
-          setMemberToEdit = {setMemberToEdit} 
-          setMemberToDelete = {setMemberToDelete} 
-          editMember = {editMember} />
+          curPage = {curPage} 
+          setCurPage = {setCurPage} 
+        />
       </Route>
       
     </div>
