@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Route } from "react-router-dom";
 import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,7 +18,7 @@ const TeamMembers = ({ members, setMembers, curPage, setCurPage }) => {
 
     const editMember = (e) => {
         e.preventDefault();
-        membersFiltered.forEach(member => {
+        members.forEach(member => {
             if (member.id === memberToEdit.id) {
                 member.name = memberToEdit.name;
                 member.email = memberToEdit.email;
@@ -31,38 +31,46 @@ const TeamMembers = ({ members, setMembers, curPage, setCurPage }) => {
     }
 
 
+    const filterList = useCallback(
+        () => {
+            let team = curPage.split(" ");
+
+            if(team.includes("Team")) {
+                team.splice(team.indexOf("Team"), 1);
+                team = team.join(" ");
+            } else {
+                team = "";
+            }
+            
+            const teamMembers = members.filter(member => member.department.includes(team));
+            setMembersFiltered(teamMembers);
+        }, [curPage, members]
+    );
+
     useEffect(() => {
         if (memberToDelete) {
-            const newMemberList = membersFiltered;
-            const memberIndex = newMemberList.findIndex(member => member.id === memberToDelete);
-            const confirmed = window.confirm(`Are you sure you want to delete ${membersFiltered[memberIndex].name}?`);
+            const newMembersList = members;
+            const memberIndex = members.findIndex(member => member.email === memberToDelete);
+            const confirmed = window.confirm(`Are you sure you want to delete ${members[memberIndex].name}?`);
 
             if (confirmed) {
-                newMemberList.splice(memberIndex, 1);
-                setMembersFiltered(newMemberList);
+                newMembersList.splice(memberIndex, 1);
+                setMembers(newMembersList);
+                filterList();
                 setMemberToDelete(null);
             } else {
                 setMemberToDelete(null);
             }
         }
-    }, [memberToDelete, membersFiltered, setMembersFiltered]);
+    }, [memberToDelete, members, membersFiltered, setMembers, filterList]);
 
 
     useEffect(() => {
-        let team = curPage.split(" ");
-
-        if(team.includes("Team")) {
-            team.splice(team.indexOf("Team"), 1);
-            team = team.join(" ");
-        } else {
-            team = "";
-        }
+        filterList();
         
-        const teamMembers = members.filter(member => member.department.includes(team));
-        setMembersFiltered(teamMembers);
-        
-    }, [curPage, members]);
+    }, [filterList]);
 
+    
 
     return (
         <div>
@@ -118,7 +126,7 @@ const TeamMembers = ({ members, setMembers, curPage, setCurPage }) => {
                                         <FontAwesomeIcon icon="edit" />
                                     </Button>{" "}
 
-                                    <Button onClick={() => setMemberToDelete(member.id)}>
+                                    <Button onClick={() => setMemberToDelete(member.email)}>
                                         <FontAwesomeIcon icon="trash" />
                                     </Button>
                                 </td>

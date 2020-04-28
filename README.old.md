@@ -92,8 +92,8 @@ After finishing your required elements, you can push your work further. These go
 
 - [x] Follow the steps above to edit members. This is difficult to do, and the architecture is tough. But it is a great skill to practice! Pay attention the the implementation details, and to the architecture. There are many ways to accomplish this. When you finish, can you think of another way?
 
-- [ ] Build another layer of your App so that you can keep track of multiple teams, each with their own encapsulated list of team members.
+- [x] Build another layer of your App so that you can keep track of multiple teams, each with their own encapsulated list of team members.
 
 - [ ] Look into the various strategies around form validation. What happens if you try to enter a number as a team-members name? Does your App allow for that? Should it? What happens if you try and enter a function as the value to one of your fields? How could this be dangerous? How might you prevent it?
 
-- [ ] Style the forms. There are some subtle browser defaults for input tags that might need to be overwritten based on their state (active, focus, hover, etc.); Keep those CSS skill sharp.
+- [x] Style the forms. There are some subtle browser defaults for input tags that might need to be overwritten based on their state (active, focus, hover, etc.); Keep those CSS skill sharp.

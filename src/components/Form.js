@@ -69,14 +69,14 @@ const Form = ({ members, setMembers, memberToEdit, setMemberToEdit, editMember }
             <FormGroup row>
                 <Label for="name" sm={2}>Name:</Label>
                 <Col sm={10}>
-                    <Input type="name" name="name" id="name" value = {member.name} placeholder="Enter the Team Member's Name" onChange = {handleChanges} required />
+                    <Input type="name" name="name" id="name" value = {member.name} placeholder="Enter the Team Member's Name" onChange = {handleChanges} required maxLength = "24" />
                 </Col>
             </FormGroup>
 
             <FormGroup row>
                 <Label for="email" sm={2}>Email:</Label>
                 <Col sm={10}>
-                    <Input type="email" name="email" id="email" value = {member.email} placeholder="Enter the Team Member's Email" onChange = {handleChanges} required />
+                    <Input type="email" name="email" id="email" value = {member.email} placeholder="Enter the Team Member's Email" onChange = {handleChanges} required maxLength = "30" />
                 </Col>
             </FormGroup>
 
