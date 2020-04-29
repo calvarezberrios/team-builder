@@ -1,0 +1,126 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.homeImg {
+  width: 100%;
+  height: 80vh;
+}
+
+.navbar {
+  padding-right: 100px;
+  padding-left: 100px; 
+}
+
+@media only screen and (max-width: 1000px) {
+  .navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (min-width: 767px) {
+  
+  .navbar-text {
+    order: 1;
+  }
+}
+
+.tableButtons {
+  text-align: right;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.team-member-table {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.subNav {
+  
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.subNav .linksContainer {
+  width: 100%;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.subNav .btn {
+  display: none;
+}
+
+.subNav .linksContainer .links {
+  min-width: 900px;
+  max-width: 900px;
+  margin: 0 auto;
+  height: 70px;
+}
+
+.subNav .linksContainer .links a {
+  padding: 10px 0;
+  margin: 0 5px;
+  display: inline-block;
+  width: 100px;
+  height: 70px;
+  vertical-align: middle;
+  text-align: center;
+  color: black;
+}
+
+.subNav .linksContainer .links a.active {
+  text-decoration: underline;
+  color: cornflowerblue;
+}
+
+
+.subNav .linksContainer .links a:first-child {
+  margin-left: 0;
+}
+.subNav .linksContainer .links a:last-child {
+  margin-right: 0;
+}
